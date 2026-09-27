@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>रासायनिक अभिक्रिया SET-1 | BPSC TRE 4.0</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,sans-serif}
+body{background:#fff7ed}
+.header{background:#9f1239;color:#fff;padding:14px;text-align:center;position:sticky;top:0;z-index:20}
+.header p{font-size:11px;opacity:0.9;margin-top:3px}
+.nav{background:#fff;padding:9px;display:flex;gap:6px;overflow-x:auto;white-space:nowrap;position:sticky;top:62px;z-index:19;box-shadow:0 2px 8px rgba(0,0,0,0.1);border-bottom:2px solid #9f1239}
+.nav a{padding:6px 11px;border-radius:20px;text-decoration:none;font-size:12px;font-weight:700;border:1.5px solid #9f1239;color:#9f1239}
+.nav a.active{background:#9f1239;color:#fff}
+.container{max-width:750px;margin:0 auto;padding:10px}
+.card{background:#fff;border-radius:12px;padding:16px;margin-bottom:10px;box-shadow:0 2px 10px rgba(0,0,0,0.06);border:1px solid #e5e7eb;border-left:4px solid #9f1239}
+.q-num{background:#9f1239;color:#fff;padding:3px 8px;border-radius:4px;font-size:11px;font-weight:700}
+.q-text{font-size:14.5px;font-weight:600;margin:10px 0;line-height:1.6}
+.opt{display:block;width:100%;text-align:left;padding:10px 12px;margin:6px 0;border:1.5px solid #d1d5db;border-radius:8px;background:#fafafa;font-size:13.5px;cursor:pointer}
+.opt.selected{border-color:#9f1239;background:#ffe4e6;font-weight:700}
+.timer{position:fixed;bottom:12px;right:12px;background:#000;color:#fff;padding:8px 14px;border-radius:20px;font-weight:700;z-index:30;font-size:13px;display:flex;gap:8px}
+.btn{width:100%;padding:13px;background:#9f1239;color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="header"><h1>🧪 रासायनिक अभिक्रिया - SET 1</h1><p>11/MIV/M-2024 | BPSC TRE 4.0 Pattern | 3 गलत = 1 Negative | 50 Qs</p></div>
+<div class="nav">
+<a class="active" href="https://gyankshetra.github.io/रासायनिक-अभिक्रिया-SET-1/">SET-1</a>
+<a href="https://gyankshetra.github.io/रासायनिक-अभिक्रिया-SET-2/">SET-2</a>
+<a href="https://gyankshetra.github.io/रासायनिक-अभिक्रिया-SET-3/">SET-3</a>
+<a href="https://gyankshetra.github.io/रासायनिक-अभिक्रिया-SET-4/">SET-4</a>
+<a href="https://gyankshetra.github.io/रासायनिक-अभिक्रिया-SET-5/">SET-5</a>
+<a href="https://gyankshetra.github.io/रासायनिक-अभिक्रिया-SET-6/">SET-6</a>
+<a href="https://gyankshetra.github.io/रासायनिक-अभिक्रिया-SET-7/">SET-7</a>
+<a href="https://gyankshetra.github.io/रासायनिक-अभिक्रिया-SET-8/">SET-8</a>
+<a href="https://gyankshetra.github.io/रासायनिक-अभिक्रिया-SET-9/">SET-9</a>
+<a href="https://gyankshetra.github.io/रासायनिक-अभिक्रिया-SET-10/">SET-10</a>
+</div>
+<div class="container" id="app">
+<div class="card" style="text-align:center">
+<h2 style="color:#9f1239">BPSC TRE 3.0 PYQ + TRE 4.0 Expected</h2>
+<p style="font-size:11px;color:#6b7280;margin:5px 0">(A)(B)(C) + (D) More than one + (E) None | 1/3 Negative</p>
+<input id="sName" placeholder="अपना नाम लिखें *" style="width:100%;padding:12px;border:2px solid #d1d5db;border-radius:8px;margin:12px 0">
+<button class="btn" onclick="startTest()">▶️ Start Test (30 Min)</button>
+<div style="margin-top:10px;text-align:left;background:#fff1f2;padding:10px;border-radius:8px;font-size:11px;border:1px dashed #9f1239">
+<b>Scoring:</b> सही=+1, गलत=-0.33, छोड़ो=0 | <b>Final = सही - (गलत/3)</b>
+</div>
+<div id="topList" style="margin-top:12px;text-align:left"></div>
+</div>
+</div>
+<div class="timer" id="timer" style="display:none">⏱️ <span id="timeTxt">30:00</span> <button onclick="pauseTest()" style="background:#f59e0b;border:none;color:#fff;padding:3px 8px;border-radius:6px;font-weight:700">⏸️</button></div>
+<script>
+const questions=[
+{q:"Food cans are coated with tin and not with zinc because (BPSC 2024 PYQ)",o:["zinc has higher melting point","zinc is costlier","zinc is more reactive than tin","More than one of the above","None of the above"],a:2},
+{q:"खाद्य डिब्बे टिन से लेपित होते हैं जिंक से नहीं क्योंकि",o:["जिंक का गलनांक अधिक","जिंक महंगा है","जिंक टिन से अधिक क्रियाशील है","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:2},
+{q:"Which is NOT a physical change? (BPSC PYQ)",o:["Burning of coal","Melting of ice","Dissolving salt in water","More than one of the above","None of the above"],a:0},
+{q:"भौतिक परिवर्तन नहीं है?",o:["कोयला जलाना","बर्फ पिघलना","नमक घोलना","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"Prevent iron frying pan from rusting? (BPSC PYQ)",o:["Applying paint","Applying grease","Applying zinc coating","More than one of the above","None of the above"],a:3},
+{q:"फ्राइंग पैन को जंग से बचाने की विधि?",o:["पेंट","ग्रीस","जिंक परत","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:3},
+{q:"Common name of Ca(OH)2? (BPSC PYQ)",o:["Baking soda","Slaked lime","Lime water","More than one of the above","None of the above"],a:1},
+{q:"Ca(OH)2 का सामान्य नाम?",o:["बेकिंग सोडा","बुझा चूना","चूना पानी","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:1},
+{q:"Dilute HCl + Iron fillings? (BPSC PYQ)",o:["Cl2 + Iron hydroxide","H2 + Iron chloride","No reaction","More than one of the above","None of the above"],a:1},
+{q:"तनु HCl + लोहे का बुरादा?",o:["क्लोरीन + हाइड्रॉक्साइड","हाइड्रोजन + आयरन क्लोराइड","कोई अभिक्रिया नहीं","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:1},
+{q:"मैग्नीशियम जलाने पर सफेद राख?",o:["MgO","Mg(OH)2","MgCO3","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"Fe + CuSO4 → FeSO4 + Cu, यह?",o:["विस्थापन","संयोजन","वियोजन","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"श्वसन कैसी अभिक्रिया?",o:["ऊष्माक्षेपी","ऊष्माशोषी","वियोजन","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"2Pb(NO3)2 → 2PbO+4NO2+O2, यह?",o:["ऊष्मीय वियोजन","प्रकाशीय वियोजन","विस्थापन","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"CaO + H2O → Ca(OH)2 + ऊष्मा",o:["संयोजन+ऊष्माक्षेपी","वियोजन+ऊष्माशोषी","विस्थापन","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"Fe पर जंग लगना?",o:["ऑक्सीकरण","अपचयन","वियोजन","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"AgCl धूप में काला क्यों?",o:["Ag बनने से (प्रकाशीय वियोजन)","ऊष्मा से","विस्थापन से","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"BaCl2+Na2SO4→BaSO4+2NaCl, BaSO4?",o:["सफेद अवक्षेप","पीला अवक्षेप","गैस","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"बिना बुझा चूना?",o:["CaO","Ca(OH)2","CaCO3","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"सफेद पेंट H2S से काला क्यों?",o:["PbS बनने से","PbO से","PbSO4 से","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"तेल-घी बासी होना (विकृतगंधिता)?",o:["ऑक्सीकरण","अपचयन","वियोजन","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"विकृतगंधिता रोकने हेतु?",o:["एंटीऑक्सीडेंट","N2 भरना","एयर-टाइट","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:3},
+{q:"2H2+O2→2H2O में H2?",o:["अपचायक","ऑक्सीकारक","उत्प्रेरक","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"लोहे पर जिंक चढ़ाना कहलाता है?",o:["यशदलेपन","टिन प्लेटिंग","क्रोमियम","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"CuSO4 से Cu को हटाएगा?",o:["Fe","Ag","Au","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"Na2CO3+2HCl→2NaCl+H2O+CO2, CO2 पहचान?",o:["चूना पानी दूधिया","तीली बुझना","दोनों","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:2},
+{q:"(g) का अर्थ समीकरण में?",o:["गैस","ठोस","द्रव","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"ऊष्माक्षेपी में ΔH?",o:["निगेटिव","पॉजिटिव","शून्य","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"2FeSO4→Fe2O3+SO2+SO3 रंग?",o:["हरा से भूरा","सफेद से काला","नीला से हरा","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"BaCl2+H2SO4→BaSO4+2HCl प्रकार?",o:["द्विविस्थापन+अवक्षेप","संयोजन","वियोजन","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"Zn+2HCl→ZnCl2+H2 में Zn?",o:["अपचायक","ऑक्सीकारक","उत्प्रेरक","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"CuSO4 विलयन रंग + Fe डालने पर?",o:["नीला से हल्का हरा","नीला ही","काला","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"समीकरण संतुलित क्यों जरूरी?",o:["द्रव्यमान संरक्षण","ऊर्जा संरक्षण","आयतन संरक्षण","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"N2+3H2→2NH3 प्रकार?",o:["संयोजन","वियोजन","विस्थापन","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"सबसे क्रियाशील धातु?",o:["K","Na","Ca","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"सबसे कम क्रियाशील?",o:["Au","K","Na","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"CaCO3→CaO+CO2 नाम?",o:["बिना बुझा चूना बनना","बुझा चूना","चूना पत्थर","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"चूना पानी दूधिया किस गैस से?",o:["CO2","O2","H2","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"H2S गंध?",o:["सड़े अंडे जैसी","मीठी","तीखी","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"H2 जलाने पर आवाज?",o:["पॉप ध्वनि","बुझ जाती","पीली लौ","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"Mg रिबन रगड़ते क्यों?",o:["MgO परत हटाने","चमकाने","साफ करने","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"N2+3H2→2NH3 उत्प्रेरक?",o:["Fe (हैबर)","Pt","Ni","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"2KClO3→2KCl+3O2 उत्प्रेरक?",o:["MnO2","Fe","Pt","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"ऑक्सीकरण अर्थ?",o:["ऑक्सीजन जुड़ना","ऑक्सीजन हटना","इलेक्ट्रॉन पाना","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"अपचयन अर्थ?",o:["ऑक्सीजन हटना / H जुड़ना","ऑक्सीजन जुड़ना","इलेक्ट्रॉन खोना","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"CuO+H2→Cu+H2O में CuO?",o:["ऑक्सीकारक","अपचायक","उत्प्रेरक","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"CuO+H2→Cu+H2O में H2?",o:["अपचायक","ऑक्सीकारक","उत्प्रेरक","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"AgNO3+NaCl→AgCl+NaNO3, AgCl रंग?",o:["सफेद अवक्षेप","पीला","काला","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"Fe2O3+2Al→Al2O3+2Fe उपयोग?",o:["थर्माइट - रेल पटरी जोड़ना","पेंट","दवा","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0},
+{q:"2H2O→2H2+O2 प्रकार?",o:["विद्युत अपघटनी वियोजन","ऊष्मीय वियोजन","प्रकाशीय","उपर्युक्त में से एक से अधिक","उपर्युक्त में से कोई नहीं"],a:0}
+];
+let cur=0,ans=[],time=1800,timerInt,student="",isPaused=false;
+function loadTop(){let t=JSON.parse(localStorage.getItem('bpsc_chem_set1_top')||'[]');if(t.length){document.getElementById('topList').innerHTML='<h3 style="color:#9f1239;margin:8px 0">🏆 Top 10</h3>'+t.slice(0,10).map((x,i)=>`<div style="background:#fff7ed;border:1px solid #fecaca;padding:8px;border-radius:8px;margin:4px 0;font-size:12px"><b>${i+1}. ${x.name}</b> - ${x.final} marks (${x.correct} सही, ${x.wrong} गलत) - ${x.date}</div>`).join('')}}
+loadTop();
+function startTest(){student=document.getElementById('sName').value.trim();if(!student){alert('नाम लिखें');return}document.getElementById('timer').style.display='flex';renderQ();timerInt=setInterval(()=>{if(!isPaused){time--;let m=Math.floor(time/60),s=time%60;document.getElementById('timeTxt').innerText=`${m}:${String(s).padStart(2,'0')}`;if(time<=0){clearInterval(timerInt);showResult()}}},1000);}
+function pauseTest(){isPaused=!isPaused;event.target.innerText=isPaused?'▶️':'⏸️'}
+function renderQ(){const q=questions[cur];document.getElementById('app').innerHTML=`<div class="card"><span class="q-num">Q ${cur+1}/50</span> <span style="font-size:11px;color:#6b7280">| ${student}</span> <span style="background:#fee2e2;color:#9f1239;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700">3 गलत = -1</span><div class="q-text">${q.q}</div>${q.o.map((o,i)=>`<button class="opt ${ans[cur]===i?'selected':''}" onclick="selectOpt(${i})"><b>${String.fromCharCode(65+i)}.</b> ${o}</button>`).join('')}<div style="display:flex;gap:8px;margin-top:10px"><button class="btn" style="flex:1;background:#6b7280" onclick="prevQ()">⬅️ Prev</button><button class="btn" style="flex:1" onclick="nextQ()">${cur===49?'Save':'Next ➡️'}</button></div><button style="width:100%;margin-top:8px;padding:10px;background:#000;color:#fff;border:none;border-radius:8px;font-weight:700" onclick="showResult()">📤 Final Submit</button><p style="text-align:center;font-size:11px;color:#6b7280;margin-top:6px">${ans.filter(x=>x!==undefined).length}/50 Attempted</p><div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:4px">${questions.map((_,i)=>`<span style="width:26px;height:26px;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:11px;font-weight:700;cursor:pointer;background:${ans[i]!==undefined?'#9f1239':'#e5e7eb'};color:${ans[i]!==undefined?'#fff':'#000'}" onclick="goTo(${i})">${i+1}</span>`).join('')}</div></div>`;}
+function selectOpt(i){ans[cur]=i;setTimeout(()=>{if(cur<49){cur++;renderQ();}else{renderQ()}},150);}
+function nextQ(){if(cur<49){cur++;renderQ();}else{showResult()}}
+function prevQ(){if(cur>0){cur--;renderQ();}}
+function goTo(i){cur=i;renderQ();}
+function showResult(){clearInterval(timerInt);document.getElementById('timer').style.display='none';let c=0,w=0,s=0;questions.forEach((q,i)=>{if(ans[i]===undefined)s++;else if(ans[i]===q.a)c++;else w++;});let neg=w/3;let final=Math.round((c-neg)*100)/100;let toppers=JSON.parse(localStorage.getItem('bpsc_chem_set1_top')||'[]');toppers.push({name:student,correct:c,wrong:w,skip:s,final:final,date:new Date().toLocaleDateString()});toppers.sort((a,b)=>b.final-a.final);localStorage.setItem('bpsc_chem_set1_top',JSON.stringify(toppers.slice(0,30)));document.getElementById('app').innerHTML=`<div class="card" style="text-align:center"><h2>🎯 FINAL RESULT (BPSC Pattern)</h2><p><b>${student}</b></p><div style="font-size:42px;font-weight:800;color:#9f1239;margin:10px 0">${final} / 50</div><div style="display:flex;gap:6px"><div style="flex:1;background:#dcfce7;padding:10px;border-radius:8px"><b style="color:#16a34a;font-size:18px">${c}</b><br><span style="font-size:10px">सही (+1)</span></div><div style="flex:1;background:#fee2e2;padding:10px;border-radius:8px"><b style="color:#dc2626;font-size:18px">${w}</b><br><span style="font-size:10px">गलत (-0.33)</span></div><div style="flex:1;background:#f3f4f6;padding:10px;border-radius:8px"><b>${s}</b><br><span style="font-size:10px">छोड़ा</span></div></div><div style="background:#fffbeb;border:1px solid #f59e0b;padding:8px;border-radius:8px;font-size:12px;margin:10px 0">Formula: ${c} - (${w}/3) = ${c} - ${neg.toFixed(2)} = <b>${final}</b></div><button class="btn" onclick="location.reload()">🔄 फिर से</button></div><div class="card"><h3>🏆 Top 10</h3>${toppers.slice(0,10).map((t,i)=>`<div style="background:#fff7ed;border:1px solid #fecaca;padding:8px;border-radius:8px;margin:4px 0;font-size:12px"><b>${i+1}. ${t.name}</b> - ${t.final} marks</div>`).join('')}</div><div class="card"><h3>📊 Full Analysis</h3>${questions.map((q,i)=>{let col=ans[i]===undefined?"#6b7280":ans[i]===q.a?"#16a34a":"#dc2626";return `<div style="padding:8px 0;border-bottom:1px solid #eee;font-size:12px"><b>Q${i+1}. ${q.q}</b><br><span style="color:${col}">आपका: ${ans[i]!==undefined?q.o[ans[i]]:'छोड़ा'}</span> | <span style="color:#16a34a">सही: ${q.o[q.a]}</span></div>`}).join('')}</div>`;window.scrollTo(0,0);}
+</script>
+</body>
+  </html>
